@@ -26,14 +26,6 @@ var budgetController = (function() {
     this.value = value;
   };
 
-  var calculateTotal = function(type) {
-    var sum = 0;
-    data.allItems[type].forEach(function(cur) {
-      sum = sum + cur.value;
-    });
-    data.totals[type] = sum;
-  };
-
   var data = {
     allItems: {
       exp: [],
@@ -42,9 +34,7 @@ var budgetController = (function() {
     totals: {
       exp: 0,
       inc: 0
-    },
-    budget: 0,
-    percentage: -1
+    }
   };
 
   return {
@@ -72,6 +62,7 @@ var budgetController = (function() {
         return newItem;
     },
 
+<<<<<<< HEAD
     deleteItem: function(type, id) {
       var ids, index;
 
@@ -138,6 +129,8 @@ var budgetController = (function() {
       };
     },
 
+=======
+>>>>>>> parent of 23be31f... Chapter06 - 2차
     testing: function() {
       console.log(data);
     }
@@ -155,6 +148,7 @@ var UIController = (function() {
     inputValue: '.add__value',
     inputBtn: '.add__btn',
     incomeContainer: '.income__list',
+<<<<<<< HEAD
     expensesContainer: '.expenses__list',
     budgetLabel: '.budget__value',
     incomeLabel: '.budget__income--value',
@@ -200,13 +194,17 @@ var UIController = (function() {
       callback(list[i], i);
     }
   };
+=======
+    expensesContainer: '.expenses__list'
+  }
+>>>>>>> parent of 23be31f... Chapter06 - 2차
 
   return {
     getInput: function() {
       return {
         type: document.querySelector(DOMstrings.inputType).value,
         description: document.querySelector(DOMstrings.inputDescription).value,
-        value: parseFloat(document.querySelector(DOMstrings.inputValue).value)
+        value: document.querySelector(DOMstrings.inputValue).value
       }
     },
 
@@ -240,9 +238,9 @@ var UIController = (function() {
     },
 
     clearFields: function() {
-      var fields, fieldsArr;
-
+      var fields;
       fields = document.querySelectorAll(DOMstrings.inputDescription + ', ' + DOMstrings.inputValue);
+<<<<<<< HEAD
       fieldsArr = Array.prototype.slice.call(fields);
 
       fieldsArr.forEach(function(current, index, array) {
@@ -265,6 +263,8 @@ var UIController = (function() {
       } else {
         document.querySelector(DOMstrings.percentageLabel).textContent = '---';
       }
+=======
+>>>>>>> parent of 23be31f... Chapter06 - 2차
     },
 
     displayPercentages: function(percentages) {
@@ -320,12 +320,14 @@ var controller = (function(budgetCtrl, UICtrl) {
     var DOM = UICtrl.getDOMstrings();
 
     document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
+
     document.addEventListener('keypress', function(event) {
       if (event.keyCode === 13 || event.which === 13) {
         ctrlAddItem();
       }
     });
 
+<<<<<<< HEAD
     document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
     document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changedType);
 
@@ -340,6 +342,8 @@ var controller = (function(budgetCtrl, UICtrl) {
 
     // 3. Display the budget on the UI
     UICtrl.displayBudget(budget);
+=======
+>>>>>>> parent of 23be31f... Chapter06 - 2차
   };
 
   var updatePercentages = function() {
@@ -360,13 +364,13 @@ var controller = (function(budgetCtrl, UICtrl) {
     // 1. Get the filed input data
     input = UICtrl.getInput();
 
-    if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
-      // 2. Add the item to the budget controller
-      newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+    // 2. Add the item to the budget controller
+    newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
-      // 3. Add the item to the UI
-      UICtrl.addListItem(newItem, input.type);
+    // 3. Add the item to the UI
+    UICtrl.addListItem(newItem, input.type);
 
+<<<<<<< HEAD
       // 4. Clear the fields
       UICtrl.clearFields();
 
@@ -401,11 +405,17 @@ var controller = (function(budgetCtrl, UICtrl) {
       // 4. Calculate and update percentages
       updatePercentages();
     }
+=======
+    // 4. Calculate the budget
+
+    // 5. Display the budget on the UI
+>>>>>>> parent of 23be31f... Chapter06 - 2차
   };
 
   return {
     init: function() {
       console.log('Applicaton has started.');
+<<<<<<< HEAD
       UICtrl.displayMonth();
       UICtrl.displayBudget({
         budget: 0,
@@ -413,6 +423,8 @@ var controller = (function(budgetCtrl, UICtrl) {
         totalExp: 0,
         percentage: -1
       });
+=======
+>>>>>>> parent of 23be31f... Chapter06 - 2차
       setupEventListeners();
     }
   };
