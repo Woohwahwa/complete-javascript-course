@@ -188,7 +188,11 @@ var UIController = (function() {
 
     dec = numSplit[1];
 
+<<<<<<< HEAD
     return (type === 'exp' ? '-' : '+') + ' ' + int + dec;
+=======
+    return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec;
+>>>>>>> parent of dbccd08... Revert "Chapter06 - 2차"
   };
 
   var nodeListForEach = function(list, callback) {
