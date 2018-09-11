@@ -468,7 +468,8 @@ Person6.greeting();
 
 
 ////////////////////////////////////
-// Lecture: Classes with Subclasses
+// Lecture: Classes with Subclasses (116)
+
 
 var Person55 = function(name, yearOfBirth, job) {
   this.name = name;
