@@ -10,7 +10,7 @@ It's a very small town, so right now there are only 3 parks and 4 streets. All p
 
 At an end-of-year meeting, your boss wants a final report with the following:
 1. Tree density of each park in the town (forumla: number of trees/park area)
-도시 안에 있는 각 공원의 나무 밀도 (공식: 나무/ 공원 넓이)
+도시 안에 있는 각 공원의 나무 밀도 (공식: 나무 수/ 공원 넓이)
 
 2. Average age of each town's park (forumla: sum of all ages/number of parks)
 각각 도시의 공원 나이 (공식: 전체합계/ 공원 수)
@@ -38,6 +38,37 @@ class Elements {
   }
 }
 
+class Park extends Elements {
+  constructor(name, buildYear, area, numTrees) {
+    super(name, buildYear)
+    this.area = area
+    this.numTrees = numTrees
+  }
+
+  density(area, numTrees) {
+    const densityTree = this.numTrees / this.area;
+    console.log(`나무의 밀도는 ${densityTree} km 이다.`)
+  }
+}
+
+class Street extends Elements {
+  constructor(name, buildYear, length, size = 3) {
+    super(name, buildYear)
+    this.length = length
+    this.size = size
+  }
+
+  classifyStreet () {
+    const classification = new Map();
+    classification.set(1, 'tiny')
+    classification.set(2, 'small')
+    classification.set(3, 'normal')
+    classification.set(4, 'big')
+    classification.set(5, 'huge')
+    console.log(`${this.name}은 ${this.buildYear}에 만들어졌고 ${classification.get(this.size)}의 크기를 가지고 있다.`)
+  }
+}
+
 
 const allParks =
 [
@@ -53,17 +84,24 @@ const allStreets = [new Street('Ocean Avenue', 1999, 1.1, 4),
 ];
 
 function calc(arr) {
-
+  const sum = arr.reduce((prev, cur, index) => prev + cur, 0)
+  return [sum, sum / arr.length]
 }
 
 function reportParks(p) {
   console.log('------------PARKS REPORT------------')
 
   // Density
+  p.forEach(el => el.density())
 
   // Average age
+  const age = p.map(el => new Date().getFullYear() - el.buildYear);
+  const [totalAge, avgAge] = calc(age)
+  console.log(`${p.length}의 평균 나이는 ${avgAge} 이다.`)
 
   // Which park has more than 1000 trees
+  const i = p.map(el => el.numTrees).findIndex(el => el >= 1000)
+  console.log(`1000그루 넘게 가지고 있는 공원은 ${p[i].name}이다.`)
 
 }
 
@@ -71,9 +109,11 @@ function reportStreets(s) {
   console.log('-----------STREETS REPORT-----------')
 
   // Total and average length of the town's streets
+  const [totalAge, avgAge] = calc(s.map(el => el.length))
+  console.log(totalAge, avgAge)
 
   // Classify sizes
-
+  s.forEach(el => el.classifyStreet())
 }
 
 reportParks(allParks);
